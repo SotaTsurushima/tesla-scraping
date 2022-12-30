@@ -1,1 +1,18 @@
-<h1>私はすごくアホです(I am truly stupid)</h1>
+<table border="1" cellspacing>
+  <tr>
+    <th>title</th>
+    <th>subtitle</th>
+    <th>towweight</th>
+  </tr>
+  <% @titles.each do |title| %>
+  <% @subtitles.each do |subtitle| %>
+  <% @towweights.each do |towweight| %>
+  <tr>
+    <td><%= title %></td>
+    <td><%= subtitle %></td>
+    <td><%= towweight %></td>
+  </tr>
+  <% end %>
+  <% end %>
+  <% end %>
+</table>
