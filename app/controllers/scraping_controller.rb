@@ -5,34 +5,31 @@ class ScrapingController < ApplicationController
     page = agent.get("https://ev-database.org/")
     
     # title
+    @tesla_data = []
     title_elements = page.search('h2 a')
-    @titles = []
-    tmp_titles = []
     title_elements.each do |ele|
-      @titles.push(ele.inner_text)
+      @tesla_data.push([ele.inner_text])
     end
-    @titles = Kaminari.paginate_array(@titles).page(params[:page]).per(50)
-    
+  
     # subtitle
     subtitle_elements = page.search('div .subtitle')
-    @subtitles = []
-    subtitle_elements.each do |ele|
-      @subtitles.push(ele.inner_text)
+    subtitle_elements.each_with_index do |ele, i|
+      @tesla_data[i].push(ele.inner_text)
     end
     
     # towweight
-    # towweight_elements = page.search('.towweight')
-    # @towweights = []
-    # towweight_elements.each do |ele|
-    #   @towweights.push(ele.inner_text)
-    # end
+    towweight_elements = page.search('.towweight')
+    towweight_elements.each_with_index do |ele, i|
+      @tesla_data[i].push(ele.inner_text)
+    end
 
     # size
-    # size_elements = page.search('.size-d')
-    # @size = []
-    # size_elements.each do |ele|
-    #   @size.push(ele.inner_text)
-    # end
+    size_elements = page.search('.size-d')
+    size_elements.each_with_index do |ele, i|
+      @tesla_data[i].push(ele.inner_text)
+    end
+
+    @tesla_data = Kaminari.paginate_array(@tesla_data).page(params[:page]).per(50)
 
   end
 end

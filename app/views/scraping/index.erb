@@ -2,11 +2,16 @@
   <tr>
     <th>title</th>
     <th>subtitle</th>
+    <th>towweight</th>
+    <th>size</th>
   </tr>
-  <% @titles.each do |title| %>
+  <% @tesla_data.each do |tesla| %>
   <tr>
-    <td><%= title %></td>
+    <td><%= tesla[0] %></td>
+    <td><%= tesla[1] %></td>
+    <td><%= tesla[2] %></td>
+    <td><%= tesla[3] %></td>
   </tr>
   <% end %>
 </table>
-<%= paginate @titles%>
+<%= paginate @tesla_data %>
