@@ -3,7 +3,10 @@
     <th>title</th>
     <th>subtitle</th>
     <th>towweight</th>
-    <th>size</th>
+    <%# <th>size</th> %>
+    <th>Germany price</th>
+    <th>Netherland price</th>
+    <th>United Kingdom price</th>
   </tr>
   <% @tesla_data.each do |tesla| %>
   <tr>
@@ -11,6 +14,8 @@
     <td><%= tesla[1] %></td>
     <td><%= tesla[2] %></td>
     <td><%= tesla[3] %></td>
+    <td><%= tesla[4] %></td>
+    <td><%= tesla[5] %></td>
   </tr>
   <% end %>
 </table>
