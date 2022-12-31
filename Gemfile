@@ -14,7 +14,6 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'mechanize'
 gem 'pry-rails'
 gem 'kaminari'
-gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
