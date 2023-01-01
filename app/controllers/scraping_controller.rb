@@ -47,6 +47,7 @@ class ScrapingController < ApplicationController
     acceleration_elements = page.search('.left .acceleration')
     top_speed_elements = page.search('.left .topspeed')
     driving_distance_elements = page.search('.left .erange_real')
+    efficiency_elements = page.search('.left .efficiency')
     
     # 加速時間
     push_left_text(tags_elements, "0 - 100")
@@ -57,6 +58,9 @@ class ScrapingController < ApplicationController
     # 走行可能距離
     push_left_text(tags_elements, "Range")
     push_left_text(driving_distance_elements, "km")
+    # 燃費？
+    push_left_text(tags_elements, "Efficiency")
+    push_left_text(efficiency_elements, "Wh/km")
 
 
 
