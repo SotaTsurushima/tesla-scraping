@@ -44,18 +44,11 @@ class ScrapingController < ApplicationController
     # end
 
     tags_elements = page.search('.left .tag')
+    acceleration_elements = page.search('.left .acceleration')
 
     # 加速時間
-    push_tag_text(tags_elements, "0 - 100")
-    # tags_elements = page.search('.left .tag')
-    # count = 0
-
-    # tags_elements.each do |ele|
-    #   if ele.inner_text.include?("0 - 100") 
-    #     @tesla_data[count].push(ele.inner_text)
-    #     count += 1
-    #   end
-    # end
+    push_left_text(tags_elements, "0 - 100")
+    push_left_text(acceleration_elements, "sec")
 
     # Germany price
     germany_price_elements = page.search('.country_de')
@@ -78,7 +71,7 @@ class ScrapingController < ApplicationController
   end
 
   # 第一引数: 取得の値
-  def push_tag_text(tags_elements, text)
+  def push_left_text(tags_elements, text)
     count = 0
     
     tags_elements.each do |ele|
