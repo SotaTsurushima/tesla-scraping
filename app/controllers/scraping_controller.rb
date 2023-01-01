@@ -43,14 +43,17 @@ class ScrapingController < ApplicationController
     #   p count
     # end
 
-    # tags_elements = page.search('.left span')
+    tags_elements = page.search('.left .tag')
+
     # 加速時間
-    # tags_elements.each_with_index do |ele, i|
+    push_tag_text(tags_elements, "0 - 100")
+    # tags_elements = page.search('.left .tag')
+    # count = 0
+
+    # tags_elements.each do |ele|
     #   if ele.inner_text.include?("0 - 100") 
-    #     @tesla_data[i].push(ele.inner_text)
-      
-    #     binding.pry
-        
+    #     @tesla_data[count].push(ele.inner_text)
+    #     count += 1
     #   end
     # end
 
@@ -72,5 +75,17 @@ class ScrapingController < ApplicationController
 
     @tesla_data = Kaminari.paginate_array(@tesla_data).page(params[:page]).per(50)
 
+  end
+
+  # 第一引数: 取得の値
+  def push_tag_text(tags_elements, text)
+    count = 0
+    
+    tags_elements.each do |ele|
+      if ele.inner_text.include?(text) 
+        @tesla_data[count].push(ele.inner_text)
+        count += 1
+      end
+    end
   end
 end
