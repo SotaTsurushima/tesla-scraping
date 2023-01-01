@@ -25,25 +25,26 @@ class ScrapingController < ApplicationController
 
     # size
     # 取れてないやつあるっぽいので保留
-    size_elements = page.search('.size-') ||
+    size_elements = page.search("span[@class*='size-']") 
     size_elements.each_with_index do |ele, i|
       @tesla_data[i].push(ele.inner_text)
     end
 
-    
-    binding.pry
-    
-
     # number_of_seats
-    # number_of_seats_elements = page.search('.icons span')
-    # # title=Number of seatsで絞り込めるようにする
-    # binding.pry
-    # number_of_seats_elements.each_with_index do |ele, i|
-    #   @tesla_data[i].push(ele.inner_text)
+    # number_of_seats_elements = page.search("span[title*='Number of seats']")
+    
+    # count = 0
+    # number_of_seats_elements.each_with_index do |ele|
+    #   if ele.inner_text.present?
+    #     count += 1
+    #     @tesla_data[count].push(ele.inner_text)
+    #     binding.pry
+    #   end
+    #   p count
     # end
 
     # tags_elements = page.search('.left span')
-    # # 加速時間
+    # 加速時間
     # tags_elements.each_with_index do |ele, i|
     #   if ele.inner_text.include?("0 - 100") 
     #     @tesla_data[i].push(ele.inner_text)
