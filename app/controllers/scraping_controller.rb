@@ -45,10 +45,20 @@ class ScrapingController < ApplicationController
 
     tags_elements = page.search('.left .tag')
     acceleration_elements = page.search('.left .acceleration')
-
+    top_speed_elements = page.search('.left .topspeed')
+    driving_distance_elements = page.search('.left .erange_real')
+    
     # 加速時間
     push_left_text(tags_elements, "0 - 100")
     push_left_text(acceleration_elements, "sec")
+    # 最高速度
+    push_left_text(tags_elements, "Top Speed")
+    push_left_text(top_speed_elements, "km/h")
+    # 走行可能距離
+    push_left_text(tags_elements, "Range")
+    push_left_text(driving_distance_elements, "km")
+
+
 
     # Germany price
     germany_price_elements = page.search('.country_de')
