@@ -81,10 +81,10 @@ class ScrapingController < ApplicationController
   end
 
   # 第一引数: 取得の値
-  def push_left_text(tags_elements, text)
+  def push_left_text(elements, text)
     count = 0
     
-    tags_elements.each do |ele|
+    elements.each do |ele|
       if ele.inner_text.include?(text) 
         @tesla_data[count].push(ele.inner_text)
         count += 1
