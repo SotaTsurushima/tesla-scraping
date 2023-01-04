@@ -19,24 +19,20 @@ class ScrapingController < ApplicationController
     towweight_elements = page.search('.towweight')
     push_text_with_index(towweight_elements)
 
-
     # size
     size_elements = page.search("span[@class*='size-']") 
     push_text_with_index(size_elements)
 
-
     # number_of_seats
-    # number_of_seats_elements = page.search("span[title*='Number of seats']")
+    number_of_seats_elements = page.search("span[title*='Number of seats']")
     
-    # count = 0
-    # number_of_seats_elements.each_with_index do |ele|
-    #   if ele.inner_text.present?
-    #     count += 1
-    #     @tesla_data[count].push(ele.inner_text)
-    #     binding.pry
-    #   end
-    #   p count
-    # end
+    present_count = 0
+    number_of_seats_elements.each do |ele|
+      if ele.inner_text.present?
+        @tesla_data[present_count].push(ele.inner_text)
+        present_count += 1
+      end
+    end
 
     tags_elements = page.search('.left .tag')
     acceleration_elements = page.search('.left .acceleration')
@@ -59,13 +55,21 @@ class ScrapingController < ApplicationController
     push_left_text(efficiency_elements, "Wh/km")
     # 充電速度
     push_left_text(tags_elements, "Fastcharge")
-    push_left_text(fastcharge_elements, "km/h")
+    # fastcharge value取得用メソッド
+    fastcharge_count = 0
+    
+    fastcharge_elements.each do |ele|
+      if ele.inner_text.include?("km/h") || ele.inner_text.include?("-")
+        @tesla_data[fastcharge_count].push(ele.inner_text)
+        fastcharge_count += 1
+      end
+    end
 
 
     # Germany price
     germany_price_elements = page.search('.country_de')
     push_text_with_index(germany_price_elements)
- 
+    
     # Netherland price
     netherland_price_elements = page.search('.country_nl')
     push_text_with_index(netherland_price_elements)
